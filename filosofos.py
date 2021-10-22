@@ -40,4 +40,4 @@ for i in range(0,5):
     print("for dos: ", i)
     total = TenedorFilosofo(tenedorArray, i)
     total.start()
-    time.sleep(2)
+    time.sleep(4)
