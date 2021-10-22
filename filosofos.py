@@ -1,12 +1,11 @@
 import threading
 import time
-
 class TenedorFilosofo(threading.Thread):
     def __init__(self, tenedores, filosofosNum):
         threading.Thread.__init__(self)
         self.tenedores = tenedores
         self.filosofosNum = filosofosNum
-        self.datoTemporal =  (self.filosofosNum + 1) % 5
+        self.datoTemporal =  (self.filosofosNum + 1) % 5 #corregido operacion ya que el %5 solo aplicaba para el 1
    
     def hilosFilosofos(self):
         while True:
@@ -17,6 +16,8 @@ class TenedorFilosofo(threading.Thread):
             time.sleep(2)
             print("Filosofo ", self.filosofosNum, "recoge tenedor del lado derecho")
             self.tenedores[self.datoTemporal].acquire()
+            time.sleep(2)
+            print("Filosofo ", self.filosofosNum, " esta comiendo") #agregado proceso comer
             time.sleep(2)
             print("Filosofo ", self.filosofosNum, "libre derecho")
             self.tenedores[self.datoTemporal].release()
@@ -39,3 +40,4 @@ for i in range(0,5):
     print("for dos: ", i)
     total = TenedorFilosofo(tenedorArray, i)
     total.start()
+    time.sleep(2)
